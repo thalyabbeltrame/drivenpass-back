@@ -1,11 +1,11 @@
 import { PrismaClient, User } from '@prisma/client';
-import { ICreateUserRequestDTO } from '../dtos/CreateUserDTO';
+import { IUserRequestDTO } from '../dtos/UserRequestDTO';
 import { IUserRepository } from './IUserRepository';
 
 export class UserRepository implements IUserRepository {
   constructor(private prisma: PrismaClient) {}
 
-  async create(data: ICreateUserRequestDTO): Promise<void> {
+  async create(data: IUserRequestDTO): Promise<void> {
     await this.prisma.user.create({
       data,
     });
