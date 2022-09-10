@@ -37,9 +37,18 @@ async function listById(credentialId: number): Promise<Credential | null> {
   });
 }
 
+async function deleteById(credentialId: number): Promise<void> {
+  await prisma.credential.delete({
+    where: {
+      id: credentialId,
+    },
+  });
+}
+
 export const credentialRepository = {
   create,
   findByUsernameAndTitle,
   list,
   listById,
+  deleteById,
 };

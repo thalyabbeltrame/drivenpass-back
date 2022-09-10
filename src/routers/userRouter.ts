@@ -7,5 +7,5 @@ import { userSchema } from '../schemas/userSchemas';
 
 export const userRouter = Router();
 
-userRouter.post('/signup', validateBody(userSchema), userController.create);
+userRouter.post('/signup', validateBody(userSchema), userController.createUser);
 userRouter.post('/login', validateBody(userSchema), userController.login);

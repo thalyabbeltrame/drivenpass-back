@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 
 import { userService } from '../services/userService';
 
-async function create(req: Request, res: Response) {
+async function createUser(req: Request, res: Response) {
   const { email, password } = req.body;
 
-  await userService.create({ email, password });
+  await userService.createUser({ email, password });
   res.status(201).send('User created with success');
 }
 
@@ -17,6 +17,6 @@ async function login(req: Request, res: Response) {
 }
 
 export const userController = {
-  create,
+  createUser,
   login,
 };

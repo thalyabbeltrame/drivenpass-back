@@ -10,11 +10,16 @@ credentialRouter.post(
   '/',
   validateToken,
   validateBody(credentialSchema),
-  credentialController.create
+  credentialController.createCredential
 );
-credentialRouter.get('/', validateToken, credentialController.list);
+credentialRouter.get('/', validateToken, credentialController.listCredentials);
 credentialRouter.get(
   '/:credentialId',
   validateToken,
-  credentialController.listById
+  credentialController.listCredentialById
+);
+credentialRouter.delete(
+  '/:credentialId',
+  validateToken,
+  credentialController.deleteCredentialById
 );
