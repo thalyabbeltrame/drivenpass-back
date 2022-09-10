@@ -2,9 +2,10 @@ import { Router } from 'express';
 
 import { userController } from '../controllers/userController';
 import { validateBody } from '../middlewares/bodyMiddleware';
-import { loginSchema, signupSchema } from '../schemas/userSchemas';
+import { sanitizeData } from '../middlewares/sanitizeMiddleware';
+import { userSchema } from '../schemas/userSchemas';
 
 export const userRouter = Router();
 
-userRouter.post('/signup', validateBody(signupSchema), userController.signup);
-userRouter.post('/login', validateBody(loginSchema), userController.login);
+userRouter.post('/signup', validateBody(userSchema), userController.create);
+userRouter.post('/login', validateBody(userSchema), userController.login);

@@ -1,6 +1,5 @@
-import bcrypt from 'bcrypt';
-
 import { IUserRequestDTO } from '../dtos/UserRequestDTO';
+import { bcryptUtils } from '../utils/bcryptUtils';
 
 export class User {
   public email: string;
@@ -8,13 +7,6 @@ export class User {
 
   constructor(props: IUserRequestDTO) {
     this.email = props.email;
-    this.password = this.hashPassword(props.password);
-  }
-
-  private hashPassword(password: string): string {
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt);
-
-    return hashedPassword;
+    this.password = bcryptUtils.encryptData(props.password);
   }
 }
