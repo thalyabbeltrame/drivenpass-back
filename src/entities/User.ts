@@ -1,12 +1,12 @@
 import bcrypt from 'bcrypt';
 
-import { ICreateUserRequestDTO } from '../dtos/CreateUserDTO';
+import { IUserRequestDTO } from '../dtos/UserRequestDTO';
 
 export class User {
   public email: string;
   public password: string;
 
-  constructor(props: ICreateUserRequestDTO) {
+  constructor(props: IUserRequestDTO) {
     this.email = props.email;
     this.password = this.hashPassword(props.password);
   }
