@@ -21,7 +21,16 @@ async function findByUsernameAndTitle(
   });
 }
 
+async function list(userId: number): Promise<Credential[]> {
+  return await prisma.credential.findMany({
+    where: {
+      userId,
+    },
+  });
+}
+
 export const credentialRepository = {
   create,
   findByUsernameAndTitle,
+  list,
 };

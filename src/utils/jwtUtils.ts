@@ -2,7 +2,6 @@ import { User } from '@prisma/client';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import '../config/index';
-import { AppError } from './AppError';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 

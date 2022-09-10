@@ -12,3 +12,4 @@ credentialRouter.post(
   validateBody(credentialSchema),
   credentialController.create
 );
+credentialRouter.get('/', validateToken, credentialController.list);

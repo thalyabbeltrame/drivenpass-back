@@ -1,4 +1,3 @@
-import { credentialRepository } from '../repositories/credentialRepository';
 import { userRepository } from '../repositories/userRepository';
 import { AppError } from '../utils/AppError';
 
