@@ -13,3 +13,8 @@ credentialRouter.post(
   credentialController.create
 );
 credentialRouter.get('/', validateToken, credentialController.list);
+credentialRouter.get(
+  '/:credentialId',
+  validateToken,
+  credentialController.listById
+);

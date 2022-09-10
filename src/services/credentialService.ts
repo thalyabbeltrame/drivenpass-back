@@ -34,7 +34,31 @@ async function list(userId: number): Promise<CredentialModel[]> {
   return decryptedCredentials;
 }
 
+async function listById(
+  userId: number,
+  credentialId: number
+): Promise<CredentialModel> {
+  await businessRulesService.checkIfUserIdExists(userId);
+
+  const credential = await credentialRepository.listById(credentialId);
+  if (!credential) {
+    throw new AppError('Credential not found', 404);
+  }
+
+  if (credential.userId !== userId) {
+    throw new AppError('Credential does not belong to the user', 403);
+  }
+
+  const decryptedCredential = {
+    ...credential,
+    password: cryptUtils.decryptData(credential.password),
+  };
+
+  return decryptedCredential;
+}
+
 export const credentialService = {
   create,
   list,
+  listById,
 };

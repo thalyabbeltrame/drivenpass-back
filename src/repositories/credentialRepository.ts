@@ -29,8 +29,17 @@ async function list(userId: number): Promise<Credential[]> {
   });
 }
 
+async function listById(credentialId: number): Promise<Credential | null> {
+  return await prisma.credential.findUnique({
+    where: {
+      id: credentialId,
+    },
+  });
+}
+
 export const credentialRepository = {
   create,
   findByUsernameAndTitle,
   list,
+  listById,
 };
