@@ -36,7 +36,16 @@ async function listCards(req: Request, res: Response) {
   return res.status(200).json(cards);
 }
 
+async function listCardById(req: Request, res: Response) {
+  const userId = parseInt(res.locals.userId);
+  const cardId = parseInt(req.params.cardId) || 0;
+
+  const card = await cardService.listCardById(userId, cardId);
+  return res.status(200).json(card);
+}
+
 export const cardController = {
   createCard,
   listCards,
+  listCardById,
 };

@@ -33,8 +33,19 @@ async function list(userId: number): Promise<Card[]> {
   return cards;
 }
 
+async function listById(cardId: number): Promise<Card | null> {
+  const card = await prisma.card.findUnique({
+    where: {
+      id: cardId,
+    },
+  });
+
+  return card;
+}
+
 export const cardRepository = {
   create,
   findByUserIdAndTitle,
   list,
+  listById,
 };

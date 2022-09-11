@@ -35,7 +35,32 @@ async function listCards(userId: number): Promise<CardModel[]> {
   return decryptedCards;
 }
 
+async function listCardById(
+  userId: number,
+  cardId: number
+): Promise<CardModel> {
+  await businessRulesService.checkIfUserIdExists(userId);
+
+  const card = await cardRepository.listById(cardId);
+  if (!card) {
+    throw new AppError('Card not found', 404);
+  }
+
+  if (card.userId !== userId) {
+    throw new AppError('Card does not belong to the user', 403);
+  }
+
+  const decryptedCard = {
+    ...card,
+    securityCode: cryptUtils.decryptData(card.securityCode),
+    password: cryptUtils.decryptData(card.password),
+  };
+
+  return decryptedCard;
+}
+
 export const cardService = {
   createCard,
   listCards,
+  listCardById,
 };

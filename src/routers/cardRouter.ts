@@ -11,3 +11,4 @@ cardRouter.use(validateToken);
 
 cardRouter.post('/', validateBody(cardSchema), cardController.createCard);
 cardRouter.get('/', cardController.listCards);
+cardRouter.get('/:cardId', cardController.listCardById);
