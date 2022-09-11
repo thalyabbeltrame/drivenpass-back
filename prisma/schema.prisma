@@ -17,6 +17,7 @@ model User {
   createdAt  DateTime     @default(now())
   Credential Credential[]
   Note       Note[]
+  Wifi       Wifi[]
 
   @@map("users")
 }
@@ -45,4 +46,16 @@ model Note {
 
   @@unique(fields: [userId, title], name: "userId_title")
   @@map("notes")
+}
+
+model Wifi {
+  id              Int      @id @default(autoincrement())
+  user            User     @relation(fields: [userId], references: [id])
+  userId          Int
+  wifiNetworkName String
+  password        String
+  title           String
+  createdAt       DateTime @default(now())
+
+  @@map("wifis")
 }
