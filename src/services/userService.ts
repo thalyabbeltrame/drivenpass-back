@@ -5,7 +5,7 @@ import { AppError } from '../utils/AppError';
 import { bcryptUtils } from '../utils/bcryptUtils';
 import { jwtUtils } from '../utils/jwtUtils';
 
-async function createCredential(data: IUserRequestDTO): Promise<void> {
+async function createUser(data: IUserRequestDTO): Promise<void> {
   const userAlreadyExists = await userRepository.findByEmail(data.email);
   if (userAlreadyExists) {
     throw new AppError('User already exists', 409);
@@ -31,6 +31,6 @@ async function login(data: IUserRequestDTO): Promise<string> {
 }
 
 export const userService = {
-  createCredential,
+  createUser,
   login,
 };
