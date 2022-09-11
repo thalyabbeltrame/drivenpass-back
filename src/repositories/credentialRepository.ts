@@ -9,13 +9,13 @@ async function create(data: ICredentialRequestDTO): Promise<void> {
   });
 }
 
-async function findByUsernameAndTitle(
-  username: string,
+async function findByUserIdAndTitle(
+  userId: number,
   title: string
 ): Promise<Credential | null> {
   return await prisma.credential.findFirst({
     where: {
-      username,
+      userId,
       title,
     },
   });
@@ -47,7 +47,7 @@ async function deleteById(credentialId: number): Promise<void> {
 
 export const credentialRepository = {
   create,
-  findByUsernameAndTitle,
+  findByUserIdAndTitle,
   list,
   listById,
   deleteById,

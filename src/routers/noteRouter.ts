@@ -15,3 +15,4 @@ noteRouter.post(
   validateBody(noteSchema),
   noteController.createNote
 );
+noteRouter.get('/', noteController.listNotes);

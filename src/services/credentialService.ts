@@ -10,8 +10,8 @@ import { businessRulesService } from './businessRulesService';
 async function createCredential(data: ICredentialRequestDTO): Promise<void> {
   await businessRulesService.checkIfUserIdExists(data.userId);
 
-  const credential = await credentialRepository.findByUsernameAndTitle(
-    data.username,
+  const credential = await credentialRepository.findByUserIdAndTitle(
+    data.userId,
     data.title
   );
   if (credential) {
