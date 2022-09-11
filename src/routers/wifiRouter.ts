@@ -10,3 +10,4 @@ export const wifiRouter = Router();
 wifiRouter.use(validateToken);
 
 wifiRouter.post('/', validateBody(wifiSchema), wifiController.createWifi);
+wifiRouter.get('/', wifiController.listWifis);

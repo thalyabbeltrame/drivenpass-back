@@ -21,7 +21,16 @@ async function findByUserIdAndTitle(
   });
 }
 
+async function list(userId: number): Promise<Wifi[]> {
+  return await prisma.wifi.findMany({
+    where: {
+      userId,
+    },
+  });
+}
+
 export const wifiRepository = {
   create,
   findByUserIdAndTitle,
+  list,
 };

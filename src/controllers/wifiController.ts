@@ -15,6 +15,14 @@ async function createWifi(req: Request, res: Response) {
   res.status(201).send('Wifi created with success');
 }
 
+async function listWifis(_req: Request, res: Response) {
+  const userId = parseInt(res.locals.userId);
+
+  const wifis = await wifiService.listWifis(userId);
+  res.status(200).json(wifis);
+}
+
 export const wifiController = {
   createWifi,
+  listWifis,
 };
