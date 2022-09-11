@@ -1,3 +1,5 @@
+import { Card } from '@prisma/client';
+
 import { ICardRequestDTO } from '../dtos/CardRequestDTO';
 import { prisma } from '../prisma';
 
@@ -21,7 +23,18 @@ async function findByUserIdAndTitle(
   return card;
 }
 
+async function list(userId: number): Promise<Card[]> {
+  const cards = await prisma.card.findMany({
+    where: {
+      userId,
+    },
+  });
+
+  return cards;
+}
+
 export const cardRepository = {
   create,
   findByUserIdAndTitle,
+  list,
 };

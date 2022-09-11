@@ -10,3 +10,4 @@ export const cardRouter = Router();
 cardRouter.use(validateToken);
 
 cardRouter.post('/', validateBody(cardSchema), cardController.createCard);
+cardRouter.get('/', cardController.listCards);
