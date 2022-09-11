@@ -6,20 +6,16 @@ import { credentialSchema } from '../schemas/credentialSchema';
 
 export const credentialRouter = Router();
 
+credentialRouter.use(validateToken);
+
 credentialRouter.post(
   '/',
-  validateToken,
   validateBody(credentialSchema),
   credentialController.createCredential
 );
-credentialRouter.get('/', validateToken, credentialController.listCredentials);
-credentialRouter.get(
-  '/:credentialId',
-  validateToken,
-  credentialController.listCredentialById
-);
+credentialRouter.get('/', credentialController.listCredentials);
+credentialRouter.get('/:credentialId', credentialController.listCredentialById);
 credentialRouter.delete(
   '/:credentialId',
-  validateToken,
   credentialController.deleteCredentialById
 );
