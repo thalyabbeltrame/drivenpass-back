@@ -32,11 +32,32 @@ async function listWifis(userId: number): Promise<WifiModel[]> {
   }));
 
   return decryptedWifis;
+}
 
-  return wifis;
+async function listWifiById(
+  userId: number,
+  wifiId: number
+): Promise<WifiModel> {
+  await businessRulesService.checkIfUserIdExists(userId);
+
+  const wifi = await wifiRepository.listById(wifiId);
+  if (!wifi) {
+    throw new AppError('Wifi not found', 404);
+  }
+
+  if (wifi.userId !== userId) {
+    throw new AppError('Wifi does not belong to the user', 403);
+  }
+
+  const decryptedWifi = {
+    ...wifi,
+    password: cryptUtils.decryptData(wifi.password),
+  };
+  return decryptedWifi;
 }
 
 export const wifiService = {
   createWifi,
   listWifis,
+  listWifiById,
 };

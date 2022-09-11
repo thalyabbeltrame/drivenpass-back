@@ -29,8 +29,17 @@ async function list(userId: number): Promise<Wifi[]> {
   });
 }
 
+async function listById(wifiId: number): Promise<Wifi | null> {
+  return await prisma.wifi.findUnique({
+    where: {
+      id: wifiId,
+    },
+  });
+}
+
 export const wifiRepository = {
   create,
   findByUserIdAndTitle,
   list,
+  listById,
 };

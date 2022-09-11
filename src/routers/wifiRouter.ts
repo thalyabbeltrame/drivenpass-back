@@ -11,3 +11,4 @@ wifiRouter.use(validateToken);
 
 wifiRouter.post('/', validateBody(wifiSchema), wifiController.createWifi);
 wifiRouter.get('/', wifiController.listWifis);
+wifiRouter.get('/:wifiId', wifiController.listWifiById);

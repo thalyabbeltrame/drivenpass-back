@@ -22,7 +22,16 @@ async function listWifis(_req: Request, res: Response) {
   res.status(200).json(wifis);
 }
 
+async function listWifiById(req: Request, res: Response) {
+  const userId = parseInt(res.locals.userId);
+  const wifiId = parseInt(req.params.wifiId) || 0;
+
+  const wifi = await wifiService.listWifiById(userId, wifiId);
+  res.status(200).json(wifi);
+}
+
 export const wifiController = {
   createWifi,
   listWifis,
+  listWifiById,
 };
