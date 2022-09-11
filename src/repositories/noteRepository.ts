@@ -31,13 +31,13 @@ async function list(userId: number): Promise<Note[]> {
   });
 }
 
-// async function listById(noteId: number): Promise<Note | null> {
-//   return await prisma.note.findUnique({
-//     where: {
-//       id: noteId,
-//     },
-//   });
-// }
+async function listById(noteId: number): Promise<Note | null> {
+  return await prisma.note.findUnique({
+    where: {
+      id: noteId,
+    },
+  });
+}
 
 // async function deleteById(noteId: number): Promise<void> {
 //   await prisma.note.delete({
@@ -51,6 +51,6 @@ export const noteRepository = {
   create,
   findByUserIdAndTitle,
   list,
-  // listById,
+  listById,
   // deleteById,
 };

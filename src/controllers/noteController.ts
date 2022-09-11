@@ -21,7 +21,16 @@ async function listNotes(_req: Request, res: Response) {
   res.status(200).json(notes);
 }
 
+async function listNoteById(req: Request, res: Response) {
+  const userId = parseInt(res.locals.userId);
+  const noteId = parseInt(req.params.noteId) || 0;
+
+  const note = await noteService.listNoteById(userId, noteId);
+  res.status(200).json(note);
+}
+
 export const noteController = {
   createNote,
   listNotes,
+  listNoteById,
 };

@@ -29,23 +29,23 @@ async function listNotes(userId: number): Promise<NoteModel[]> {
   return notes;
 }
 
-// async function listNoteById(
-//   userId: number,
-//   noteId: number
-// ): Promise<NoteModel> {
-//   await businessRulesService.checkIfUserIdExists(userId);
+async function listNoteById(
+  userId: number,
+  noteId: number
+): Promise<NoteModel> {
+  await businessRulesService.checkIfUserIdExists(userId);
 
-//   const note = await noteRepository.listById(noteId);
-//   if (!note) {
-//     throw new AppError('Note not found', 404);
-//   }
+  const note = await noteRepository.listById(noteId);
+  if (!note) {
+    throw new AppError('Note not found', 404);
+  }
 
-//   if (note.userId !== userId) {
-//     throw new AppError('Note does not belong to the user', 403);
-//   }
+  if (note.userId !== userId) {
+    throw new AppError('Note does not belong to the user', 403);
+  }
 
-//   return note;
-// }
+  return note;
+}
 
 // async function deleteCredentialById(
 //   userId: number,
@@ -68,6 +68,6 @@ async function listNotes(userId: number): Promise<NoteModel[]> {
 export const noteService = {
   createNote,
   listNotes,
-  // listNoteById,
+  listNoteById,
   // deleteNoteById,
 };

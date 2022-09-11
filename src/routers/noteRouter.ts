@@ -16,3 +16,4 @@ noteRouter.post(
   noteController.createNote
 );
 noteRouter.get('/', noteController.listNotes);
+noteRouter.get('/:noteId', noteController.listNoteById);
