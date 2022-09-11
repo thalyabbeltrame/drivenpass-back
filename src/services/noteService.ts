@@ -47,27 +47,24 @@ async function listNoteById(
   return note;
 }
 
-// async function deleteCredentialById(
-//   userId: number,
-//   noteId: number
-// ): Promise<void> {
-//   await businessRulesService.checkIfUserIdExists(userId);
+async function deleteNoteById(userId: number, noteId: number): Promise<void> {
+  await businessRulesService.checkIfUserIdExists(userId);
 
-//   const note = await noteRepository.listById(noteId);
-//   if (!note) {
-//     throw new AppError('Note not found', 404);
-//   }
+  const note = await noteRepository.listById(noteId);
+  if (!note) {
+    throw new AppError('Note not found', 404);
+  }
 
-//   if (note.userId !== userId) {
-//     throw new AppError('Note does not belong to the user', 403);
-//   }
+  if (note.userId !== userId) {
+    throw new AppError('Note does not belong to the user', 403);
+  }
 
-//   await noteRepository.deleteById(noteId);
-// }
+  await noteRepository.deleteById(noteId);
+}
 
 export const noteService = {
   createNote,
   listNotes,
   listNoteById,
-  // deleteNoteById,
+  deleteNoteById,
 };

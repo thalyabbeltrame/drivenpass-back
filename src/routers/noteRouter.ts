@@ -17,3 +17,4 @@ noteRouter.post(
 );
 noteRouter.get('/', noteController.listNotes);
 noteRouter.get('/:noteId', noteController.listNoteById);
+noteRouter.delete('/:noteId', noteController.deleteNoteById);

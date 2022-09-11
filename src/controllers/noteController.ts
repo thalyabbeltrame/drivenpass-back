@@ -29,8 +29,17 @@ async function listNoteById(req: Request, res: Response) {
   res.status(200).json(note);
 }
 
+async function deleteNoteById(req: Request, res: Response) {
+  const userId = parseInt(res.locals.userId);
+  const noteId = parseInt(req.params.noteId) || 0;
+
+  await noteService.deleteNoteById(userId, noteId);
+  res.status(200).send('Note deleted with success');
+}
+
 export const noteController = {
   createNote,
   listNotes,
   listNoteById,
+  deleteNoteById,
 };
