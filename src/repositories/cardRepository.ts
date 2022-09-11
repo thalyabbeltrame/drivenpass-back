@@ -43,9 +43,18 @@ async function listById(cardId: number): Promise<Card | null> {
   return card;
 }
 
+async function deleteById(cardId: number): Promise<void> {
+  await prisma.card.delete({
+    where: {
+      id: cardId,
+    },
+  });
+}
+
 export const cardRepository = {
   create,
   findByUserIdAndTitle,
   list,
   listById,
+  deleteById,
 };

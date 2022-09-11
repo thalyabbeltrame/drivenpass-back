@@ -44,8 +44,17 @@ async function listCardById(req: Request, res: Response) {
   return res.status(200).json(card);
 }
 
+async function deleteCardById(req: Request, res: Response) {
+  const userId = parseInt(res.locals.userId);
+  const cardId = parseInt(req.params.cardId) || 0;
+
+  await cardService.deleteCardById(userId, cardId);
+  return res.status(200).send('Card deleted with success');
+}
+
 export const cardController = {
   createCard,
   listCards,
   listCardById,
+  deleteCardById,
 };
