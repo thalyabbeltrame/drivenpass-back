@@ -37,9 +37,18 @@ async function listById(wifiId: number): Promise<Wifi | null> {
   });
 }
 
+async function deleteById(wifiId: number): Promise<void> {
+  await prisma.wifi.delete({
+    where: {
+      id: wifiId,
+    },
+  });
+}
+
 export const wifiRepository = {
   create,
   findByUserIdAndTitle,
   list,
   listById,
+  deleteById,
 };

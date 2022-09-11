@@ -56,8 +56,24 @@ async function listWifiById(
   return decryptedWifi;
 }
 
+async function deleteWifiById(userId: number, wifiId: number): Promise<void> {
+  await businessRulesService.checkIfUserIdExists(userId);
+
+  const wifi = await wifiRepository.listById(wifiId);
+  if (!wifi) {
+    throw new AppError('Wifi not found', 404);
+  }
+
+  if (wifi.userId !== userId) {
+    throw new AppError('Wifi does not belong to the user', 403);
+  }
+
+  await wifiRepository.deleteById(wifiId);
+}
+
 export const wifiService = {
   createWifi,
   listWifis,
   listWifiById,
+  deleteWifiById,
 };
