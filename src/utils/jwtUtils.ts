@@ -6,7 +6,7 @@ import '../config/index';
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 function generateToken(user: User): string {
-  const token = jwt.sign({ userId: user.id }, 'secret', {
+  const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
     expiresIn: '1d',
   });
 
