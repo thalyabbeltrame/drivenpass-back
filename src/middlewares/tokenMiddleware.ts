@@ -19,9 +19,12 @@ export const validateToken = async (
   }
 
   const token = authorization.split(' ')[1];
-  const { userId } = jwtUtils.verifyToken(token) as { userId: string };
 
-  res.locals.userId = userId;
-
-  next();
+  try {
+    const { userId } = jwtUtils.verifyToken(token) as { userId: string };
+    res.locals.userId = userId;
+    next();
+  } catch (error) {
+    throw new AppError('Invalid token', 401);
+  }
 };
