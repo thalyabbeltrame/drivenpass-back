@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 
-import '../config/index';
-
 import { AppError } from '../utils/AppError';
 import { jwtUtils } from '../utils/jwtUtils';
 

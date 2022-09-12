@@ -4,10 +4,10 @@ import { INoteRequestDTO } from '../dtos/NoteRequestDTO';
 import { Note } from '../entities/Note';
 import { noteRepository } from '../repositories/noteRepository';
 import { AppError } from '../utils/AppError';
-import { businessRulesService } from './businessRulesService';
+import { authService } from './authService';
 
 async function createNote(data: INoteRequestDTO): Promise<void> {
-  await businessRulesService.checkIfUserIdExists(data.userId);
+  await authService.checkIfUserIdExists(data.userId);
 
   const note = await noteRepository.findByUserIdAndTitle(
     data.userId,
@@ -22,7 +22,7 @@ async function createNote(data: INoteRequestDTO): Promise<void> {
 }
 
 async function listNotes(userId: number): Promise<NoteModel[]> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const notes = await noteRepository.list(userId);
 
@@ -33,7 +33,7 @@ async function listNoteById(
   userId: number,
   noteId: number
 ): Promise<NoteModel> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const note = await noteRepository.listById(noteId);
   if (!note) {
@@ -48,7 +48,7 @@ async function listNoteById(
 }
 
 async function deleteNoteById(userId: number, noteId: number): Promise<void> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const note = await noteRepository.listById(noteId);
   if (!note) {

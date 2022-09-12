@@ -5,10 +5,10 @@ import { Card } from '../entities/Card';
 import { cardRepository } from '../repositories/cardRepository';
 import { AppError } from '../utils/AppError';
 import { cryptUtils } from '../utils/cryptUtils';
-import { businessRulesService } from './businessRulesService';
+import { authService } from './authService';
 
 async function createCard(data: ICardRequestDTO): Promise<void> {
-  await businessRulesService.checkIfUserIdExists(data.userId);
+  await authService.checkIfUserIdExists(data.userId);
 
   const card = await cardRepository.findByUserIdAndTitle(
     data.userId,
@@ -23,7 +23,7 @@ async function createCard(data: ICardRequestDTO): Promise<void> {
 }
 
 async function listCards(userId: number): Promise<CardModel[]> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const cards = await cardRepository.list(userId);
   const decryptedCards = cards.map((card) => ({
@@ -39,7 +39,7 @@ async function listCardById(
   userId: number,
   cardId: number
 ): Promise<CardModel> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const card = await cardRepository.listById(cardId);
   if (!card) {
@@ -60,7 +60,7 @@ async function listCardById(
 }
 
 async function deleteCardById(userId: number, cardId: number): Promise<void> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const card = await cardRepository.listById(cardId);
   if (!card) {

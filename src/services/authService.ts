@@ -8,6 +8,6 @@ async function checkIfUserIdExists(userId: number): Promise<void> {
   }
 }
 
-export const businessRulesService = {
+export const authService = {
   checkIfUserIdExists,
 };

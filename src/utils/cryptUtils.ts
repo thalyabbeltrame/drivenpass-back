@@ -1,5 +1,7 @@
 import Cryptr from 'cryptr';
 
+import '../config/index';
+
 const CRYPT_KEY = process.env.CRYPT_KEY || 'secret';
 
 function encryptData(text: string): string {

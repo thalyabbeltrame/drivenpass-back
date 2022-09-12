@@ -29,7 +29,7 @@ async function createCard(req: Request, res: Response) {
   return res.status(201).send('Card created with success');
 }
 
-async function listCards(req: Request, res: Response) {
+async function listCards(_req: Request, res: Response) {
   const userId = parseInt(res.locals.userId);
 
   const cards = await cardService.listCards(userId);

@@ -2,7 +2,6 @@ import { Router } from 'express';
 
 import { userController } from '../controllers/userController';
 import { validateBody } from '../middlewares/bodyMiddleware';
-import { sanitizeData } from '../middlewares/sanitizeMiddleware';
 import { userSchema } from '../schemas/userSchemas';
 
 export const userRouter = Router();

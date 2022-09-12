@@ -5,10 +5,10 @@ import { Credential } from '../entities/Credential';
 import { credentialRepository } from '../repositories/credentialRepository';
 import { AppError } from '../utils/AppError';
 import { cryptUtils } from '../utils/cryptUtils';
-import { businessRulesService } from './businessRulesService';
+import { authService } from './authService';
 
 async function createCredential(data: ICredentialRequestDTO): Promise<void> {
-  await businessRulesService.checkIfUserIdExists(data.userId);
+  await authService.checkIfUserIdExists(data.userId);
 
   const credential = await credentialRepository.findByUserIdAndTitle(
     data.userId,
@@ -23,7 +23,7 @@ async function createCredential(data: ICredentialRequestDTO): Promise<void> {
 }
 
 async function listCredentials(userId: number): Promise<CredentialModel[]> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const credentials = await credentialRepository.list(userId);
   const decryptedCredentials = credentials.map((credential) => ({
@@ -38,7 +38,7 @@ async function listCredentialById(
   userId: number,
   credentialId: number
 ): Promise<CredentialModel> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const credential = await credentialRepository.listById(credentialId);
   if (!credential) {
@@ -61,7 +61,7 @@ async function deleteCredentialById(
   userId: number,
   credentialId: number
 ): Promise<void> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const credential = await credentialRepository.listById(credentialId);
   if (!credential) {

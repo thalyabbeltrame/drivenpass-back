@@ -5,10 +5,10 @@ import { Wifi } from '../entities/Wifi';
 import { wifiRepository } from '../repositories/wifiRepository';
 import { AppError } from '../utils/AppError';
 import { cryptUtils } from '../utils/cryptUtils';
-import { businessRulesService } from './businessRulesService';
+import { authService } from './authService';
 
 async function createWifi(data: IWifiRequestDTO): Promise<void> {
-  await businessRulesService.checkIfUserIdExists(data.userId);
+  await authService.checkIfUserIdExists(data.userId);
 
   const wifi = await wifiRepository.findByUserIdAndTitle(
     data.userId,
@@ -23,7 +23,7 @@ async function createWifi(data: IWifiRequestDTO): Promise<void> {
 }
 
 async function listWifis(userId: number): Promise<WifiModel[]> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const wifis = await wifiRepository.list(userId);
   const decryptedWifis = wifis.map((wifi) => ({
@@ -38,7 +38,7 @@ async function listWifiById(
   userId: number,
   wifiId: number
 ): Promise<WifiModel> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const wifi = await wifiRepository.listById(wifiId);
   if (!wifi) {
@@ -57,7 +57,7 @@ async function listWifiById(
 }
 
 async function deleteWifiById(userId: number, wifiId: number): Promise<void> {
-  await businessRulesService.checkIfUserIdExists(userId);
+  await authService.checkIfUserIdExists(userId);
 
   const wifi = await wifiRepository.listById(wifiId);
   if (!wifi) {

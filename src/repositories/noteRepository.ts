@@ -13,14 +13,12 @@ async function findByUserIdAndTitle(
   userId: number,
   title: string
 ): Promise<Note | null> {
-  const note = await prisma.note.findFirst({
+  return await prisma.note.findFirst({
     where: {
       userId,
       title,
     },
   });
-
-  return note;
 }
 
 async function list(userId: number): Promise<Note[]> {

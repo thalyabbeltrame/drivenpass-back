@@ -12,35 +12,29 @@ async function create(data: ICardRequestDTO): Promise<void> {
 async function findByUserIdAndTitle(
   userId: number,
   title: string
-): Promise<ICardRequestDTO | null> {
-  const card = await prisma.card.findFirst({
+): Promise<Card | null> {
+  return await prisma.card.findFirst({
     where: {
       userId,
       title,
     },
   });
-
-  return card;
 }
 
 async function list(userId: number): Promise<Card[]> {
-  const cards = await prisma.card.findMany({
+  return await prisma.card.findMany({
     where: {
       userId,
     },
   });
-
-  return cards;
 }
 
 async function listById(cardId: number): Promise<Card | null> {
-  const card = await prisma.card.findUnique({
+  return await prisma.card.findUnique({
     where: {
       id: cardId,
     },
   });
-
-  return card;
 }
 
 async function deleteById(cardId: number): Promise<void> {

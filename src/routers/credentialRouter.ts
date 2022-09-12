@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import { credentialController } from '../controllers/credentialController';
 import { validateBody } from '../middlewares/bodyMiddleware';
 import { validateToken } from '../middlewares/tokenMiddleware';
