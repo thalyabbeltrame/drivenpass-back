@@ -7,7 +7,7 @@ A Typescript designed project to manage passwords
 ### Create user
 
 ```http
-POTS /users/signup
+POST /users/signup
 ```
 
 #### Request:
